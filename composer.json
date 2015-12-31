@@ -1,0 +1,25 @@
+{
+    "name": "asasmoyo/yii2-saml",
+    "description": "Connection Yii 2 application to a Saml Identity Provider for Single Sign On",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","saml","single sign on"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Arba Sasmoyo",
+            "email": "asasmoyo@student.uns.ac.id"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "onelogin/php-saml": "2.6.1"
+    },
+    "require-dev": {
+        "codeception/codeception": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "asasmoyo\\yii2saml\\": ""
+        }
+    }
+}
