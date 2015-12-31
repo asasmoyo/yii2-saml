@@ -1,6 +1,6 @@
 {
     "name": "asasmoyo/yii2-saml",
-    "description": "Connection Yii 2 application to a Saml Identity Provider for Single Sign On",
+    "description": "Connect Yii 2 application to a Saml Identity Provider for Single Sign On",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","saml","single sign on"],
     "license": "MIT",
@@ -15,7 +15,7 @@
         "onelogin/php-saml": "2.6.1"
     },
     "require-dev": {
-        "codeception/codeception": "*"
+        "phpunit/phpunit": "5.1.*"
     },
     "autoload": {
         "psr-4": {
