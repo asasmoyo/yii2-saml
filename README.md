@@ -3,7 +3,7 @@ Yii 2 Saml
 
 [![Build Status](https://travis-ci.org/asasmoyo/yii2-saml.svg?branch=master)](https://travis-ci.org/asasmoyo/yii2-saml)
 
-Connection Yii 2 application to a Saml Identity Provider for Single Sign On
+Connect Yii 2 application to a Saml Identity Provider for Single Sign On
 
 Installation
 ------------
