@@ -12,7 +12,7 @@ class Saml extends Component {
     public $config_file = 'saml.php';
 
     public function init() {
-        
+
     }
 
 }

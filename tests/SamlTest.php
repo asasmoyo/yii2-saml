@@ -1,9 +1,13 @@
 <?php
 
-class SamlTest extends PHPUnit_Framework_TestCase {
+namespace asasmoyo\yii2saml\tests;
+
+use asasmoyo\yii2saml\Saml;
+
+class SamlTest extends \PHPUnit_Framework_TestCase {
 
     public function testCreateInstance() {
-        $instance = new \asasmoyo\yii2saml\Saml();
+        $instance = new Saml();
         $this->assertNotEquals($instance, null);
     }
 
