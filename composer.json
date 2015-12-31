@@ -19,7 +19,12 @@
     },
     "autoload": {
         "psr-4": {
-            "asasmoyo\\yii2saml\\": ""
+            "asasmoyo\\yii2saml\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "asasmoyo\\yii2saml\\tests\\": "tests/"
         }
     }
 }
