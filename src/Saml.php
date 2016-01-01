@@ -2,13 +2,14 @@
 
 namespace asasmoyo\yii2saml;
 
-use yii\base\Object;
 use Yii;
+use yii\base\Object;
 
 /**
  * This class wraps OneLogin_Saml2_Auth class by creating an instance of that class using configurations specified in configFileName variable inside @app/config folder.
  */
-class Saml extends Object {
+class Saml extends Object
+{
 
     /**
      * The file in which contains OneLogin_Saml2_Auth configurations. The file should be located in @app/config folder.
@@ -27,7 +28,8 @@ class Saml extends Object {
      */
     private $config;
 
-    public function init() {
+    public function init()
+    {
         parent::init();
 
         $configFile = Yii::getAlias('@app/config') . '/' . $this->configFileName;
@@ -39,43 +41,51 @@ class Saml extends Object {
     /**
      * Call the login method on OneLogin_Saml2_Auth.
      */
-    public function login($returnTo = null, $parameters = array(), $forceAuthn = false, $isPassive = false) {
+    public function login($returnTo = null, $parameters = array(), $forceAuthn = false, $isPassive = false)
+    {
         return $this->instance->login($returnTo, $parameters, $forceAuthn, $isPassive);
     }
 
     /**
      * Call the logout method on OneLogin_Saml2_Auth.
      */
-    public function logout($returnTo = null, $parameters = array(), $nameId = null, $sessionIndex = null) {
+    public function logout($returnTo = null, $parameters = array(), $nameId = null, $sessionIndex = null)
+    {
         return $this->instance->logout($returnTo, $parameters, $nameId, $sessionIndex);
     }
 
     /**
      * Call the processSLO method on OneLogin_Saml2_Auth.
      */
-    public function processSLO($keepLocalSession = false, $requestId = null, $retrieveParametersFromServer = false, $cbDeleteSession = null) {
-        return $this->instance->proceesSLO($keepLocalSession, $requestId, $retrieveParametersFromServer, $cbDeleteSession);
+    public function processSLO($keepLocalSession = false, $requestId = null, $retrieveParametersFromServer = false, $cbDeleteSession = null)
+    {
+        return $this->instance->processSLO($keepLocalSession, $requestId, $retrieveParametersFromServer, $cbDeleteSession);
     }
 
     /**
      * Call the getAttributes method on OneLogin_Saml2_Auth.
      */
-    public function getAttributes() {
+    public function getAttributes()
+    {
         return $this->instance->getAttributes();
     }
 
     /**
      * Call the getAttribute method on OneLogin_Saml2_Auth.
      */
-    public function getAttribute($name) {
+    public function getAttribute($name)
+    {
         return $this->instance->getAttribute($name);
     }
 
     /**
      * Returns the metadata of this Service Provider in xml.
      * @return string Metadata in xml
+     * @throws \Exception
+     * @throws \OneLogin_Saml2_Error
      */
-    public function getMetadata() {
+    public function getMetadata()
+    {
         $oneLoginSetting = new \OneLogin_Saml2_Settings($this->config, true);
         $metadata = $oneLoginSetting->getSPMetadata();
 
@@ -85,6 +95,22 @@ class Saml extends Object {
         }
 
         return $metadata;
+    }
+
+    /**
+     * Call the processResponse method on OneLogin_Saml2_Auth.
+     */
+    public function processResponse()
+    {
+        $this->instance->processResponse();
+    }
+
+    /**
+     * Call the getErrors method on OneLogin_Saml2_Auth.
+     */
+    public function getErrors()
+    {
+        return $this->instance->getErrors();
     }
 
 }
