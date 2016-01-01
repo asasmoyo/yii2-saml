@@ -30,7 +30,7 @@ class MetadataAction extends Action {
 
     public function run() {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
-        return $this->samlInstance->getMetadata();
+        echo $this->samlInstance->getMetadata();
     }
 
 }
