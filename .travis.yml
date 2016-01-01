@@ -8,4 +8,4 @@ php:
 install:
     - composer install
 
-script: phpunit --verbose --debug --bootstrap vendor/autoload.php tests
+script: phpunit --verbose --debug --bootstrap tests/bootstrap.php tests
