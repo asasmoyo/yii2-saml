@@ -3,7 +3,7 @@
 namespace asasmoyo\yii2saml\actions;
 
 /**
- * This action initiate Single Logout process on Identity Provider.
+ * This action initiate logout process on Identity Provider.
  * @package asasmoyo\yii2saml\actions
  */
 class LogoutAction extends BaseAction
@@ -15,15 +15,12 @@ class LogoutAction extends BaseAction
     public $returnTo;
 
     /**
-     * Initiates Single Logout.
+     * Initiates Logout.
      */
     public function run()
     {
-        if ($this->samlInstance->isAuthenticated()) {
-            $this->samlInstance->logout();
-        }
-
-        \Yii::$app->response->redirect($this->returnTo);
+        \Yii::$app->user->logout();
+        $this->samlInstance->logout($this->returnTo);
     }
 
 }
