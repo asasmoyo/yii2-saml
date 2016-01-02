@@ -95,6 +95,8 @@ This extension provides 4 actions:
 
     }
     ```
+    
+    **NOTE: Make sure to register the acs action's url to ``AssertionConsumerService`` in Identity Provider.** 
 
 3. MetadataAction
 
