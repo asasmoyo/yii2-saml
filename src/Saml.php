@@ -113,4 +113,12 @@ class Saml extends Object
         return $this->instance->getErrors();
     }
 
+    /**
+     * Call the isAuthenticated method on OneLogin_Saml2_Auth.
+     */
+    public function isAuthenticated()
+    {
+        return $this->instance->isAuthenticated();
+    }
+
 }
