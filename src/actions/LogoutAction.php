@@ -19,7 +19,11 @@ class LogoutAction extends BaseAction
      */
     public function run()
     {
-        $this->samlInstance->logout($this->returnTo);
+        if ($this->samlInstance->isAuthenticated()) {
+            $this->samlInstance->processSLO();
+        }
+
+        \Yii::$app->response->redirect($this->returnTo);
     }
 
 }
