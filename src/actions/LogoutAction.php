@@ -10,11 +10,16 @@ class LogoutAction extends BaseAction
 {
 
     /**
+     * @var string An url which user will be redirected to after logout.
+     */
+    public $returnTo;
+
+    /**
      * Initiates Single Logout.
      */
     public function run()
     {
-        $this->samlInstance->logout();
+        $this->samlInstance->logout($this->returnTo);
     }
 
 }

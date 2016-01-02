@@ -130,7 +130,8 @@ This extension provides 4 actions:
         public function actions() {
             return [
                 'logout' => [
-                    'class' => 'asasmoyo\yii2saml\actions\LogoutAction'
+                    'class' => 'asasmoyo\yii2saml\actions\LogoutAction',
+                    'returnTo' => Url::to('site/bye'),
                 ]
             ];
         }
