@@ -80,8 +80,8 @@ This extension provides 4 actions:
             return [
                 'acs' => [
                     'class' => 'asasmoyo\yii2saml\actions\AcsAction',
-                    'successUrl' => Url::to('site/welcome'), // optional url
-                    'successCallback' => [$this, 'callback'], // optional callback
+                    'successCallback' => [$this, 'callback'],
+                    'successUrl' => Url::to('site/welcome'),
                 ]
             ];
         }
