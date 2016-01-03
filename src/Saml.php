@@ -55,14 +55,6 @@ class Saml extends Object
     }
 
     /**
-     * Call the processSLO method on OneLogin_Saml2_Auth.
-     */
-    public function processSLO($keepLocalSession = false, $requestId = null, $retrieveParametersFromServer = false, $cbDeleteSession = null)
-    {
-        return $this->instance->processSLO($keepLocalSession, $requestId, $retrieveParametersFromServer, $cbDeleteSession);
-    }
-
-    /**
      * Call the getAttributes method on OneLogin_Saml2_Auth.
      */
     public function getAttributes()
@@ -111,14 +103,6 @@ class Saml extends Object
     public function getErrors()
     {
         return $this->instance->getErrors();
-    }
-
-    /**
-     * Call the isAuthenticated method on OneLogin_Saml2_Auth.
-     */
-    public function isAuthenticated()
-    {
-        return $this->instance->isAuthenticated();
     }
 
 }
