@@ -33,12 +33,12 @@ Register ``asasmoyo\yii2saml\Saml`` to your components in ``config/web.php``.
 'components' => [
     'saml' => [
         'class' => 'asasmoyo\yii2saml\Saml',
-        'configFileName' => 'saml.php', // OneLogin_Saml config file (Optional)
+        'configFileName' => '@app/config/saml.php', // OneLogin_Saml config file (Optional)
     ]
 ]
 ```
 
-This component requires a ``OneLogin_Saml`` config stored in a php file inside ``@app/config`` folder. The default value for ``configFileName`` is ``saml.php`` so make sure to create this file before. See this [link](https://github.com/onelogin/php-saml/blob/master/settings_example.php) for example configuration.
+This component requires a ``OneLogin_Saml`` configuration stored in a php file. The default value for ``configFileName`` is ``@app/config/saml.php`` so make sure to create this file before. See this [link](https://github.com/onelogin/php-saml/blob/master/settings_example.php) for example configuration.
 
 Usage
 -----
@@ -51,7 +51,7 @@ This extension provides 4 actions:
 
     ```php
     <?php
-    
+
     class SamlController extends Controller {
 
         public function actions() {
@@ -95,18 +95,18 @@ This extension provides 4 actions:
 
     }
     ```
-    
-    **NOTE: Make sure to register the acs action's url to ``AssertionConsumerService`` in Identity Provider.** 
+
+    **NOTE: Make sure to register the acs action's url to ``AssertionConsumerService`` in Identity Provider.**
 
 3. MetadataAction
 
     This action will show metadata of you application in xml. To use this action, just register the action to your controller's action.
-    
+
     ```php
     <?php
-    
+
     class SamlController extends Controller {
-        
+
         public function actions() {
             return [
                 'metadata' => [
@@ -114,19 +114,19 @@ This extension provides 4 actions:
                 ]
             ];
         }
-        
+
     }
     ```
 
 4. LogoutAction
 
     This action will initiate SingleLogout process to Identity Provider. To use this action, just register this action to your controller's actions.
-    
+
     ```php
     <?php
-    
+
     class SamlController extends Controller {
-        
+
         public function actions() {
             return [
                 'logout' => [
@@ -135,10 +135,10 @@ This extension provides 4 actions:
                 ]
             ];
         }
-        
+
     }
     ```
-    
+
 LICENCE
 -------
 

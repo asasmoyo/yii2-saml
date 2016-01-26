@@ -12,9 +12,9 @@ class Saml extends Object
 {
 
     /**
-     * The file in which contains OneLogin_Saml2_Auth configurations. The file should be located in @app/config folder.
+     * The file in which contains OneLogin_Saml2_Auth configurations.
      */
-    public $configFileName = 'saml.php';
+    public $configFileName = '@app/config/saml.php';
 
     /**
      * OneLogin_Saml2_Auth instance.
@@ -32,7 +32,7 @@ class Saml extends Object
     {
         parent::init();
 
-        $configFile = Yii::getAlias('@app/config') . '/' . $this->configFileName;
+        $configFile = Yii::getAlias($this->configFileName);
 
         $this->config = require($configFile);
         $this->instance = new \OneLogin_Saml2_Auth($this->config);
