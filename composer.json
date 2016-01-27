@@ -19,7 +19,7 @@
   "prefer-stable": true,
   "require": {
     "yiisoft/yii2": "*",
-    "onelogin/php-saml": "*"
+    "onelogin/php-saml": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "5.1.*"
