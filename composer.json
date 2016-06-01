@@ -1,37 +1,35 @@
 {
-  "name": "asasmoyo/yii2-saml",
-  "description": "Connect Yii 2 application to a Saml Identity Provider for Single Sign On",
-  "type": "yii2-extension",
-  "keywords": [
-    "yii2",
-    "extension",
-    "saml",
-    "single sign on"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Arba Sasmoyo",
-      "email": "asasmoyo@student.uns.ac.id"
+    "name": "asasmoyo/yii2-saml",
+    "description": "Connect Yii 2 application to a Saml Identity Provider for Single Sign On",
+    "type": "yii2-extension",
+    "keywords": [
+        "yii2",
+        "extension",
+        "saml",
+        "single sign on"
+    ],
+    "license": "MIT",
+    "authors": [{
+        "name": "Arba Sasmoyo",
+        "email": "asasmoyo@student.uns.ac.id"
+    }],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "yiisoft/yii2": "*",
+        "onelogin/php-saml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "asasmoyo\\yii2saml\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "asasmoyo\\yii2saml\\tests\\": "tests/"
+        }
     }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
-  "require": {
-    "yiisoft/yii2": "*",
-    "onelogin/php-saml": "dev-master"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "5.1.*"
-  },
-  "autoload": {
-    "psr-4": {
-      "asasmoyo\\yii2saml\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "asasmoyo\\yii2saml\\tests\\": "tests/"
-    }
-  }
 }
