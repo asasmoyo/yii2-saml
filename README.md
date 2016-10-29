@@ -38,7 +38,35 @@ Register ``asasmoyo\yii2saml\Saml`` to your components in ``config/web.php``.
 ]
 ```
 
-This component requires a ``OneLogin_Saml`` configuration stored in a php file. The default value for ``configFileName`` is ``@app/config/saml.php`` so make sure to create this file before. See this [link](https://github.com/onelogin/php-saml/blob/master/settings_example.php) for example configuration.
+This component requires a ``OneLogin_Saml`` configuration stored in a php file. The default value for ``configFileName`` is ``@app/config/saml.php`` so make sure to create this file before. This file must returns the ``OneLogin_Saml`` configuration. See this [link](https://github.com/onelogin/php-saml/blob/master/settings_example.php) for example configuration.
+
+```php
+<?php
+
+$spBaseUrl = 'https://yoursite.com';
+return [
+    'sp' => [
+        'entityId' => $spBaseUrl.'/demo1/metadata.php',
+        'assertionConsumerService' => [
+            'url' => $spBaseUrl.'/demo1/index.php?acs',
+        ],
+        'singleLogoutService' => [
+            'url' => $spBaseUrl.'/demo1/index.php?sls',
+        ],
+        'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
+    ],
+    'idp' => [
+        'entityId' => 'identity-provider',
+        'singleSignOnService' => [
+            'url' => 'https://idp.com/sso',
+        ],
+        'singleLogoutService' => [
+            'url' => 'https://idp.com/sls',
+        ],
+        'x509cert' => 'someweirdstrings',
+    ],
+];
+```
 
 Usage
 -----
