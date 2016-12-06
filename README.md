@@ -52,7 +52,7 @@ return [
             'url' => $spBaseUrl.'/saml/acs',
         ],
         'singleLogoutService' => [
-            'url' => $spBaseUrl.'/saml/logout',
+            'url' => $spBaseUrl.'/saml/sls',
         ],
         'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
     ],
@@ -125,7 +125,7 @@ This extension provides 4 actions:
     }
     ```
 
-    **NOTE: Make sure to register the acs action's url to ``AssertionConsumerService`` in Identity Provider.**
+    **NOTE: Make sure to register the acs action's url to ``AssertionConsumerService`` and the sls actions's url to ``SingleLogoutService`` (if supported) in the Identity Provider.**
 
 3. MetadataAction
 
@@ -165,6 +165,26 @@ This extension provides 4 actions:
             ];
         }
 
+    }
+    ```
+
+5. SlsAction
+
+    This action will process saml logout request/response sent by Identity Provider. To use this action just register this action to you controllers's actions.
+
+    ```php
+    <?php
+
+    class SamlController extends Controller {
+
+        public function actions() {
+            return [
+                'sls' => [
+                    'class' => 'asasmoyo\yii2saml\actions\SlsAction',
+                    'successUrl' => Url::to('site/bye'),
+                ]
+            ]
+        }
     }
     ```
 
