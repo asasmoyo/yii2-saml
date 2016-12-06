@@ -43,15 +43,16 @@ This component requires a ``OneLogin_Saml`` configuration stored in a php file. 
 ```php
 <?php
 
-$spBaseUrl = 'https://yoursite.com';
+$spBaseUrl = Yii::app()->getBaseUrl(true);
+
 return [
     'sp' => [
-        'entityId' => $spBaseUrl.'/demo1/metadata.php',
+        'entityId' => $spBaseUrl.'/saml/metadata',
         'assertionConsumerService' => [
-            'url' => $spBaseUrl.'/demo1/index.php?acs',
+            'url' => $spBaseUrl.'/saml/acs',
         ],
         'singleLogoutService' => [
-            'url' => $spBaseUrl.'/demo1/index.php?sls',
+            'url' => $spBaseUrl.'/saml/logout',
         ],
         'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
     ],
@@ -63,7 +64,7 @@ return [
         'singleLogoutService' => [
             'url' => 'https://idp.com/sls',
         ],
-        'x509cert' => 'someweirdstrings',
+        'x509cert' => '<x509cert string>',
     ],
 ];
 ```
