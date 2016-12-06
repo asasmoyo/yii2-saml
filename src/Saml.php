@@ -97,6 +97,11 @@ class Saml extends Object
         $this->instance->processResponse();
     }
 
+    public function processSLO()
+    {
+        $this->instance->processSLO();   
+    }
+
     /**
      * Call the getErrors method on OneLogin_Saml2_Auth.
      */
