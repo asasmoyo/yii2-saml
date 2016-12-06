@@ -43,7 +43,8 @@ This component requires a ``OneLogin_Saml`` configuration stored in a php file. 
 ```php
 <?php
 
-$spBaseUrl = Yii::app()->getBaseUrl(true);
+$urlManager = Yii::$app->urlManager;
+$spBaseUrl = $urlManager->getHostInfo() . $urlManager->getBaseUrl();
 
 return [
     'sp' => [
@@ -81,7 +82,17 @@ This extension provides 4 actions:
     ```php
     <?php
 
+    namespace app\controllers;
+
+    use Yii;
+    use yii\web\Controller;
+    use yii\helpers\Url;
+
+
     class SamlController extends Controller {
+
+        // Remove CSRF protection
+        public $enableCsrfValidation = false;
 
         public function actions() {
             return [
@@ -103,10 +114,21 @@ This extension provides 4 actions:
     ```php
     <?php
 
+    namespace app\controllers;
+
+    use Yii;
+    use yii\web\Controller;
+    use yii\helpers\Url;
+
+
     class SamlController extends Controller {
+
+        // Remove CSRF protection
+        public $enableCsrfValidation = false;
 
         public function actions() {
             return [
+                ...
                 'acs' => [
                     'class' => 'asasmoyo\yii2saml\actions\AcsAction',
                     'successCallback' => [$this, 'callback'],
@@ -121,7 +143,6 @@ This extension provides 4 actions:
         public function callback($attributes) {
             // do something
         }
-
     }
     ```
 
@@ -134,17 +155,14 @@ This extension provides 4 actions:
     ```php
     <?php
 
-    class SamlController extends Controller {
-
         public function actions() {
             return [
+                ...
                 'metadata' => [
                     'class' => 'asasmoyo\yii2saml\actions\MetadataAction'
                 ]
             ];
         }
-
-    }
     ```
 
 4. LogoutAction
@@ -154,18 +172,15 @@ This extension provides 4 actions:
     ```php
     <?php
 
-    class SamlController extends Controller {
-
         public function actions() {
             return [
+                ...
                 'logout' => [
                     'class' => 'asasmoyo\yii2saml\actions\LogoutAction',
                     'returnTo' => Url::to('site/bye'),
                 ]
             ];
         }
-
-    }
     ```
 
 5. SlsAction
@@ -175,17 +190,17 @@ This extension provides 4 actions:
     ```php
     <?php
 
-    class SamlController extends Controller {
-
         public function actions() {
+            ...
+
             return [
+                ...
                 'sls' => [
                     'class' => 'asasmoyo\yii2saml\actions\SlsAction',
                     'successUrl' => Url::to('site/bye'),
                 ]
             ]
         }
-    }
     ```
 
 LICENCE
