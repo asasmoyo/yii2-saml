@@ -20,7 +20,7 @@ class SlsAction extends BaseAction
     public $successUrl;
 
     /**
-     * It handles sls logout request/response from Identity Provider. It will check whether is valid or not. If it isn't, an Exception will be thrown. If is valid, the successCallback will be called. You can use the callback to create user from attributes sent by Identity Provider or do something else. After that, user will be redirected to successUrl.     * @return $this|mixed
+     * It handles sls logout request/response from Identity Provider. It will check whether is valid or not. If it isn't, an Exception will be thrown. If is valid,  user will be redirected to successUrl.     * @return $this|mixed
      * @throws Exception
      * @throws InvalidConfigException
      */
@@ -39,6 +39,6 @@ class SlsAction extends BaseAction
             }
             throw new Exception($message);
         }
-        return \Yii::$app->response->redirect($this->returnTo);
+        return \Yii::$app->response->redirect($this->successUrl);
     }
 }
