@@ -203,6 +203,16 @@ This extension provides 4 actions:
         }
     ```
 
+Usage
+-----
+
+If the SAMLResponse is rejected, add to the SAML settings the parameter
+``` 
+'debug' => true,
+```
+and the reason will be prompted.
+
+
 LICENCE
 -------
 

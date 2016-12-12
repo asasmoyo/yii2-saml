@@ -12,6 +12,7 @@ use yii\web\Response;
  */
 class SlsAction extends BaseAction
 {
+
     /**
      * After succesfull logout process user will be redirected to this url.
      * @var string
@@ -25,12 +26,19 @@ class SlsAction extends BaseAction
      */
     public function run()
     {
-        // Check wether SAMLRequest/SAMLResponse is present. If it is, we process the logout request/response and redirect the user to returnTo.
-        $request = \Yii::$app->request->get('SAMLRequest');
-        $response = \Yii::$app->request->get('SAMLResponse');
-        if ($request || $response) {
-            $this->samlInstance->processSLO();
-            return \Yii::$app->response->redirect($this->returnTo);
+        $this->samlInstance->processSLO();
+
+        $errors = $this->samlInstance->getErrors();
+        if (!empty($errors)) {
+            $message = 'Logout error: ' . implode(",", $errors);
+            if ($this->samlInstance->isDebugActive()) {
+                $reason = $this->samlInstance->getLastErrorReason();
+                if (!empty($reason)) {
+                    $message .= "\n".$reason;
+                }
+            }
+            throw new Exception($message);
         }
+        return \Yii::$app->response->redirect($this->returnTo);
     }
 }
