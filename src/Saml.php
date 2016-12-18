@@ -78,10 +78,10 @@ class Saml extends Object
      */
     public function getMetadata()
     {
-        $oneLoginSetting = new \OneLogin_Saml2_Settings($this->config, true);
-        $metadata = $oneLoginSetting->getSPMetadata();
+        $samlSettings = new \OneLogin_Saml2_Settings($this->config, true);
+        $metadata = $samlSettings->getSPMetadata();
 
-        $errors = $oneLoginSetting->validateMetadata($metadata);
+        $errors = $samlSettings->validateMetadata($metadata);
         if (!empty($errors)) {
             throw new \Exception('Invalid Metadata Service Provider');
         }
@@ -97,6 +97,11 @@ class Saml extends Object
         $this->instance->processResponse();
     }
 
+    public function processSLO()
+    {
+        $this->instance->processSLO();   
+    }
+
     /**
      * Call the getErrors method on OneLogin_Saml2_Auth.
      */
@@ -105,4 +110,20 @@ class Saml extends Object
         return $this->instance->getErrors();
     }
 
+    /**
+     * Call the getLastErrorReason method on OneLogin_Saml2_Auth.
+     */
+    public function getLastErrorReason()
+    {
+        return $this->instance->getLastErrorReason();
+    }
+
+    /**
+     * Check if debug is enabled on OneLogin_Saml2_Auth.
+     */
+    public function isDebugActive()
+    {
+        $samlSettings = $this->instance->getSettings();
+        return $samlSettings->isDebugActive();
+    }
 }

@@ -14,6 +14,13 @@ class AcsAction extends BaseAction
 {
 
     /**
+     * This array contains the mapping between Identity Provider user attribute names and Yii2 user attribute names
+     * You may define at least the mapping for the username
+     * @var array
+     */
+    public $attributeMapping = array();
+
+    /**
      * This callable will be called when a login process is succesfull. The attributes sent from Identity Provider will be passed to this method.
      * @var callable
      */
@@ -37,7 +44,13 @@ class AcsAction extends BaseAction
 
         $errors = $this->samlInstance->getErrors();
         if (!empty($errors)) {
-            $message = 'Saml response error: ' . var_export($errors, true);
+            $message = 'Saml response error: ' . implode(",", $errors);
+            if ($this->samlInstance->isDebugActive()) {
+                $reason = $this->samlInstance->getLastErrorReason();
+                if (!empty($reason)) {
+                    $message .= "\n".$reason;
+                }
+            }
             throw new Exception($message);
         }
 
