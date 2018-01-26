@@ -17,8 +17,7 @@ class MetadataAction extends BaseAction
      */
     public function run()
     {
-        \Yii::$app->response->format = Response::FORMAT_XML;
-        echo $this->samlInstance->getMetadata();
+        Yii::$app->response->format = Response::FORMAT_XML;
+        Yii::$app->response->content = $this->samlInstance->getMetadata();
     }
-
 }
