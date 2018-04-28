@@ -26,15 +26,17 @@ class Saml extends Object
      * Configurations for OneLogin_Saml2_Auth.
      * @var array
      */
-    private $config;
+    public $config;
 
     public function init()
     {
         parent::init();
 
-        $configFile = Yii::getAlias($this->configFileName);
+        if (empty($this->config)) {
+            $configFile = Yii::getAlias($this->configFileName);
+            $this->config = require($configFile);
+        }
 
-        $this->config = require($configFile);
         $this->instance = new \OneLogin_Saml2_Auth($this->config);
     }
 
@@ -99,7 +101,7 @@ class Saml extends Object
 
     public function processSLO()
     {
-        $this->instance->processSLO();   
+        $this->instance->processSLO();
     }
 
     /**
