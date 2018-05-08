@@ -3,12 +3,12 @@
 namespace asasmoyo\yii2saml;
 
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 
 /**
  * This class wraps OneLogin_Saml2_Auth class by creating an instance of that class using configurations specified in configFileName variable inside @app/config folder.
  */
-class Saml extends Object
+class Saml extends BaseObject
 {
 
     /**
