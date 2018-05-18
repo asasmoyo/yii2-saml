@@ -70,6 +70,50 @@ return [
 ];
 ```
 
+**NOTE : As of version 1.6.0 you can directly put your configuration into your component. For example:**
+
+```php
+<?php
+
+$urlManager = Yii::$app->urlManager;
+$spBaseUrl = $urlManager->getHostInfo() . $urlManager->getBaseUrl();
+
+return [
+    // some other configuration here
+
+    'components' => [
+        'saml' => [
+            'class' => 'asasmoyo\yii2saml\Saml',
+            'config' => [
+                'sp' => [
+                    'entityId' => $spBaseUrl.'/saml/metadata',
+                    'assertionConsumerService' => [
+                        'url' => $spBaseUrl.'/saml/acs',
+                    ],
+                    'singleLogoutService' => [
+                        'url' => $spBaseUrl.'/saml/sls',
+                    ],
+                    'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
+                ],
+                'idp' => [
+                    'entityId' => 'identity-provider',
+                    'singleSignOnService' => [
+                        'url' => 'https://idp.com/sso',
+                    ],
+                    'singleLogoutService' => [
+                        'url' => 'https://idp.com/sls',
+                    ],
+                    'x509cert' => '<x509cert string>',
+                ],
+            ];
+        ]
+    ],
+
+    // some other configuration here
+];
+
+```
+
 Usage
 -----
 
@@ -207,7 +251,7 @@ Usage
 -----
 
 If the SAMLResponse is rejected, add to the SAML settings the parameter
-``` 
+```
 'debug' => true,
 ```
 and the reason will be prompted.
