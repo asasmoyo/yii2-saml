@@ -78,7 +78,7 @@ return [
 $urlManager = Yii::$app->urlManager;
 $spBaseUrl = $urlManager->getHostInfo() . $urlManager->getBaseUrl();
 
-return [
+$config = [
     // some other configuration here
 
     'components' => [
@@ -111,6 +111,8 @@ return [
 
     // some other configuration here
 ];
+
+return $config;
 
 ```
 
