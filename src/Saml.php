@@ -3,6 +3,9 @@
 namespace asasmoyo\yii2saml;
 
 use Yii;
+use Exception;
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\Settings;
 use yii\base\BaseObject;
 
 /**
@@ -13,12 +16,13 @@ class Saml extends BaseObject
 
     /**
      * The file in which contains OneLogin_Saml2_Auth configurations.
+     * @var string
      */
     public $configFileName = '@app/config/saml.php';
 
     /**
      * OneLogin_Saml2_Auth instance.
-     * @var \OneLogin_Saml2_Auth
+     * @var \OneLogin\Saml2\Auth
      */
     private $instance;
 
@@ -37,7 +41,7 @@ class Saml extends BaseObject
             $this->config = require($configFile);
         }
 
-        $this->instance = new \OneLogin_Saml2_Auth($this->config);
+        $this->instance = new Auth($this->config);
     }
 
     /**
@@ -75,17 +79,17 @@ class Saml extends BaseObject
     /**
      * Returns the metadata of this Service Provider in xml.
      * @return string Metadata in xml
-     * @throws \Exception
-     * @throws \OneLogin_Saml2_Error
+     * @throws Exception
+     * @throws OneLogin\Saml2\Error
      */
     public function getMetadata()
     {
-        $samlSettings = new \OneLogin_Saml2_Settings($this->config, true);
+        $samlSettings = new Settings($this->config, true);
         $metadata = $samlSettings->getSPMetadata();
 
         $errors = $samlSettings->validateMetadata($metadata);
         if (!empty($errors)) {
-            throw new \Exception('Invalid Metadata Service Provider');
+            throw new Exception('Invalid Metadata Service Provider');
         }
 
         return $metadata;
