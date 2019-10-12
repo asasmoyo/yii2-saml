@@ -132,4 +132,12 @@ class Saml extends BaseObject
         $samlSettings = $this->instance->getSettings();
         return $samlSettings->isDebugActive();
     }
+
+    /**
+     * Check if user is authenticated.
+     */
+    public function isAuthenticated()
+    {
+        return $this->instance->isAuthenticated();
+    }
 }
