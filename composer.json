@@ -18,8 +18,7 @@
             "email": "ardi93@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
+    "minimum-stability": "stable",
     "require": {
         "yiisoft/yii2": "^2.0.28",
         "onelogin/php-saml": "^3.0.0"
