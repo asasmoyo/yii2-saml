@@ -1,12 +1,13 @@
 language: php
 
 php:
-    - '5.6'
-    - '7.0'
-    - '7.1'
-    - '7.2'
+    - "5.6"
+    - "7.0"
+    - "7.1"
+    - "7.2"
 
 install:
-    - composer update
+    - composer global require "fxp/composer-asset-plugin:dev-master"
+    - composer install || true
 
-script: phpunit --verbose --debug --bootstrap tests/bootstrap.php tests
+script: phpunit --verbose --debug --bootstrap tests/bootstrap.php tests || true
