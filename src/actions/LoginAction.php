@@ -9,6 +9,7 @@ use Yii;
  */
 class LoginAction extends BaseAction
 {
+    public $returnUrl = null;
 
     /**
      * Initiate login process using Saml.
@@ -16,7 +17,7 @@ class LoginAction extends BaseAction
      */
     public function run()
     {
-        $this->samlInstance->login();
+        $this->samlInstance->login($this->returnUrl);
     }
 
 }
