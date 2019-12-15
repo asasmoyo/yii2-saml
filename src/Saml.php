@@ -103,9 +103,12 @@ class Saml extends BaseObject
         $this->instance->processResponse();
     }
 
-    public function processSLO()
+    /**
+     * Call the processSLO method on OneLogin_Saml2_Auth.
+     */
+    public function processSLO($keepLocalSession = false, $requestId = null, $retrieveParametersFromServer = false, $cbDeleteSession = null, $stay = false)
     {
-        $this->instance->processSLO();
+        $this->instance->processSLO($keepLocalSession, $requestId, $retrieveParametersFromServer, $cbDeleteSession, $stay);
     }
 
     /**
