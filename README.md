@@ -143,7 +143,8 @@ This extension provides 4 actions:
         public function actions() {
             return [
                 'login' => [
-                    'class' => 'asasmoyo\yii2saml\actions\LoginAction'
+                    'class' => 'asasmoyo\yii2saml\actions\LoginAction',
+                    'returnUrl' => Yii::app()->user->returnUrl
                 ]
             ];
         }
@@ -188,6 +189,11 @@ This extension provides 4 actions:
          */
         public function callback($attributes) {
             // do something
+            //
+            // if (isset($_POST['RelayState'])) {
+            // $_POST['RelayState'] - should be returnUrl from login action
+            // }
+           
         }
     }
     ```
