@@ -143,13 +143,24 @@ This extension provides 4 actions:
         public function actions() {
             return [
                 'login' => [
-                    'class' => 'asasmoyo\yii2saml\actions\LoginAction'
+                    'class' => 'asasmoyo\yii2saml\actions\LoginAction',
+                    'returnTo' => Yii::app()->user->returnUrl
                 ]
             ];
         }
 
     }
     ```
+
+    The login method can receive seven optional parameters:
+
+    * `$returnTo` - The target URL the user should be returned to after login..
+    * `$parameters` - An array of parameters that will be added to the `GET` in the HTTP-Redirect.
+    * `$forceAuthn` - When true the `AuthNRequest` will set the `ForceAuthn='true'`
+    * `$isPassive` - When true the `AuthNRequest` will set the `Ispassive='true'`
+    * `$strict` - True if we want to stay (returns the url string) False to redirect
+    * `$setNameIdPolicy` - When true the AuthNRequest will set a nameIdPolicy element.
+    * `$nameIdValueReq` - Indicates to the IdP the subject that should be authenticated.
 
     Now you can login to your Identity Provider by visiting ``saml/login``.
 
@@ -188,6 +199,11 @@ This extension provides 4 actions:
          */
         public function callback($attributes) {
             // do something
+            //
+            // if (isset($_POST['RelayState'])) {
+            // $_POST['RelayState'] - should be returnUrl from login action
+            // }
+           
         }
     }
     ```
