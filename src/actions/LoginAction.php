@@ -17,7 +17,7 @@ class LoginAction extends BaseAction
     /**
      * @param array $parameters   Extra parameters to be added to the GET
      */
-    public $parameters = null;
+    public $parameters = [];
 
     /**
      * @param bool  $forceAuthn When true the AuthNRequest will set the ForceAuthn='true'
@@ -42,6 +42,9 @@ class LoginAction extends BaseAction
     /**
      * @param string    $nameIdValueReq   Indicates to the IdP the subject that should be authenticated
      */
+
+    public $nameIdValueReq = null;
+
 
     /**
      * Initiate login process using Saml.
