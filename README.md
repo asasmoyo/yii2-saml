@@ -195,10 +195,9 @@ This extension provides 4 actions:
         }
 
         /**
-         * @param array $attributes attributes sent by Identity Provider.
-         * @param string|null $nameId Name ID Value
+         * @param array $param has 'attributes' and 'nameId' from response
          */
-        public function callback($attributes, $nameId) {
+        public function callback($param) {
             // do something
             //
             // if (isset($_POST['RelayState'])) {
