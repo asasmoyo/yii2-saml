@@ -195,15 +195,14 @@ This extension provides 4 actions:
         }
 
         /**
-         * @param array $attributes attributes sent by Identity Provider.
+         * @param array $param has 'attributes' and 'nameId' from response
          */
-        public function callback($attributes) {
+        public function callback($param) {
             // do something
             //
             // if (isset($_POST['RelayState'])) {
             // $_POST['RelayState'] - should be returnUrl from login action
             // }
-           
         }
     }
     ```
