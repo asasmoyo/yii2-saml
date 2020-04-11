@@ -4,4 +4,5 @@ nbproject
 .tags1
 .idea
 
-vendor
+/vendor
+/composer.lock
