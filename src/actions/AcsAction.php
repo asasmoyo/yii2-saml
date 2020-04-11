@@ -59,8 +59,11 @@ class AcsAction extends BaseAction
             throw new InvalidConfigException($message);
         }
 
-        // TODO: consider converting arguments into hash in next major release (will break previous versions)
-        $response = call_user_func($this->successCallback, $this->samlInstance->getAttributes(), $this->samlInstance->getNameId());
+        $callback_param = [
+            'nameId' => $this->samlInstance->getNameId(),
+            'attributes' => $this->samlInstance->getAttributes(),
+        ];
+        $response = call_user_func($this->successCallback, $callback_param);
         if ($response instanceof Response) {
             return $response;
         }
