@@ -28,7 +28,6 @@ class LogoutAction extends BaseAction
     {
         // logout the user on Yii 2 and Identity Provider.
         \Yii::$app->user->logout();
-        //$returnTo = null, $parameters = array(), $nameId = null, $sessionIndex = null, $stay = false, $nameIdFormat = null, $nameIdNameQualifier = null, $nameIdSPNameQualifier = null)
         $this->samlInstance->logout($this->returnTo,$this->parameters,$this->nameId,$this->sessionIndex,$this->stay,$this->nameIdFormat,$this->nameIdNameQualifier,$this->nameIdSPNameQualifier);
     }
 
