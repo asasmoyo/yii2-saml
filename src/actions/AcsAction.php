@@ -61,6 +61,9 @@ class AcsAction extends BaseAction
 
         $callback_param = [
             'nameId' => $this->samlInstance->getNameId(),
+            'sessionIndex' => $this->samlInstance->getSessionIndex(),
+            'nameIdNameQualifier' => $this->samlInstance->getnameIdNameQualifier(),
+            'nameIdSPNameQualifier' => $this->samlInstance->getNameIdSPNameQualifier(),
             'attributes' => $this->samlInstance->getAttributes(),
         ];
         $response = call_user_func($this->successCallback, $callback_param);
