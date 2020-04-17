@@ -67,7 +67,22 @@ class Saml extends BaseObject
     {
         return $this->instance->getAttributes();
     }
-
+    public function getNameId()
+    {
+        return $this->instance->getNameId();
+    }
+    public function getNameIdNameQualifier()
+    {
+        return $this->instance->getNameIdNameQualifier();
+    }
+    public function getNameIdSPNameQualifier()
+    {
+        return $this->instance->getNameIdSPNameQualifier();
+    }
+    public function getSessionIndex()
+    {
+        return $this->instance->getSessionIndex();
+    }
     /**
      * Call the getAttribute method on OneLogin_Saml2_Auth.
      */
