@@ -57,7 +57,7 @@ class Saml extends BaseObject
      */
     public function logout($returnTo = null, $parameters = array(), $nameId = null, $sessionIndex = null, $stay = false, $nameIdFormat = null, $nameIdNameQualifier = null, $nameIdSPNameQualifier = null)
     {
-        return $this->instance->logout($returnTo, $parameters, $nameId, $sessionIndex, $stay, $nameIdFormat,$nameIdNameQualifier, $nameIdSPNameQualifier);
+        return $this->instance->logout($returnTo, $parameters, $nameId, $sessionIndex, $stay, $nameIdFormat, $nameIdNameQualifier, $nameIdSPNameQualifier);
     }
 
     /**
@@ -67,22 +67,39 @@ class Saml extends BaseObject
     {
         return $this->instance->getAttributes();
     }
+
+    /**
+     * Call the getNameId method on OneLogin_Saml2_Auth.
+     */
     public function getNameId()
     {
         return $this->instance->getNameId();
     }
+
+    /**
+     * Call the getNameIdNameQualifier method on OneLogin_Saml2_Auth.
+     */
     public function getNameIdNameQualifier()
     {
         return $this->instance->getNameIdNameQualifier();
     }
+
+    /**
+     * Call the getNameIdSPNameQualifier method on OneLogin_Saml2_Auth.
+     */
     public function getNameIdSPNameQualifier()
     {
         return $this->instance->getNameIdSPNameQualifier();
     }
+
+    /**
+     * Call the getSessionIndex method on OneLogin_Saml2_Auth.
+     */
     public function getSessionIndex()
     {
         return $this->instance->getSessionIndex();
     }
+
     /**
      * Call the getAttribute method on OneLogin_Saml2_Auth.
      */
