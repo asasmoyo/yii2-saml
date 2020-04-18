@@ -238,7 +238,7 @@ This extension provides 4 actions:
                 ...
                 'logout' => [
                     'class' => 'asasmoyo\yii2saml\actions\LogoutAction',
-                    'logoutIdP' => true, // if you want to logout on idp too
+                    'logoutIdP' => false, // if you don't want to logout on idp
                     'returnTo' => Url::to('site/bye'),
                     'nameId' => $session->get('nameId'),
                     'sessionIndex' => $session->get('sessionIndex'),

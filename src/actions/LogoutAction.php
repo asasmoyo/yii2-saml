@@ -12,48 +12,48 @@ class LogoutAction extends BaseAction
     /**
      * @param string|null $returnTo            The target URL the user should be returned to after logout.
      */
-    public $returnTo;
+    public $returnTo = null;
 
     /**
      * @param array       $parameters          Extra parameters to be added to the GET
      */
-    public $parameters;
+    public $parameters = [];
 
     /**
      * @param string|null $nameId              The NameID that will be set in the LogoutRequest.
      */
-    public $nameId;
+    public $nameId = null;
 
     /**
      * @param string|null $sessionIndex        The SessionIndex (taken from the SAML Response in the SSO process).
      */
-    public $sessionIndex;
+    public $sessionIndex = null;
 
     /**
      * @param bool        $stay                True if we want to stay (returns the url string) False to redirect
      */
-    public $stay;
+    public $stay = false;
 
     /**
      * @param string|null $nameIdFormat        The NameID Format will be set in the LogoutRequest.
      */
-    public $nameIdFormat;
+    public $nameIdFormat = null;
 
     /**
      * @param string|null $nameIdNameQualifier The NameID NameQualifier will be set in the LogoutRequest.
      */
-    public $nameIdNameQualifier;
+    public $nameIdNameQualifier = null;
 
     /**
      * @param string|null $nameIdSPNameQualifier
      */
-    public $nameIdSPNameQualifier;
+    public $nameIdSPNameQualifier = null;
 
     /**
      * true if you want to logout on Identity Provider too.
-     * @param boolean|null $logoutIdP
+     * @param bool        $logoutIdP
      */
-    public $logoutIdP;
+    public $logoutIdP = true;
 
     /**
      * Initiates Logout.
