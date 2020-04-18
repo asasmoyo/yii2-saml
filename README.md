@@ -195,7 +195,7 @@ This extension provides 4 actions:
         }
 
         /**
-         * @param array $param has 'attributes' and 'nameId' from response
+         * @param array $param has 'attributes', 'nameId' , 'sessionIndex', 'nameIdNameQualifier' and 'nameIdSPNameQualifier' from response
          */
         public function callback($param) {
             // do something
@@ -232,13 +232,19 @@ This extension provides 4 actions:
 
     ```php
     <?php
-
+        $session = Yii::$app->session;
         public function actions() {
             return [
                 ...
                 'logout' => [
                     'class' => 'asasmoyo\yii2saml\actions\LogoutAction',
                     'returnTo' => Url::to('site/bye'),
+                    'nameId' => $session->get('nameId'),
+                    'sessionIndex' => $session->get('sessionIndex'),
+                    'stay' => false,
+                    'nameIdFormat' => null,
+                    'nameIdNameQualifier' => $session->get('nameIdNameQualifier'),
+                    'nameIdSPNameQualifier' => $session->get('nameIdSPNameQualifier'),
                 ]
             ];
         }
