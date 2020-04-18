@@ -50,6 +50,12 @@ class LogoutAction extends BaseAction
     public $nameIdSPNameQualifier;
 
     /**
+     * true if you want to logout on Identity Provider too.
+     * @param boolean|null $logoutIdP
+     */
+    public $logoutIdP;
+
+    /**
      * Initiates Logout.
      */
     public function run()
@@ -58,6 +64,8 @@ class LogoutAction extends BaseAction
         \Yii::$app->user->logout();
 
         // and logout user on Identity Provider
-        $this->samlInstance->logout($this->returnTo, $this->parameters, $this->nameId, $this->sessionIndex, $this->stay, $this->nameIdFormat, $this->nameIdNameQualifier, $this->nameIdSPNameQualifier);
+        if ($this->logoutIdP == true) {
+            $this->samlInstance->logout($this->returnTo, $this->parameters, $this->nameId, $this->sessionIndex, $this->stay, $this->nameIdFormat, $this->nameIdNameQualifier, $this->nameIdSPNameQualifier);
+        }
     }
 }
