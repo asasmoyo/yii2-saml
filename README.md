@@ -105,7 +105,7 @@ $config = [
                     ],
                     'x509cert' => '<x509cert string>',
                 ],
-            ];
+            ],
         ]
     ],
 
