@@ -75,8 +75,8 @@ return [
 ```php
 <?php
 
-$urlManager = Yii::$app->urlManager;
-$spBaseUrl = $urlManager->getHostInfo() . $urlManager->getBaseUrl();
+//your application(Service Provider) URL
+$spBaseUrl = 'http://example.com'; 
 
 $config = [
     // some other configuration here
@@ -144,7 +144,7 @@ This extension provides 4 actions:
             return [
                 'login' => [
                     'class' => 'asasmoyo\yii2saml\actions\LoginAction',
-                    'returnTo' => Yii::app()->user->returnUrl
+                    'returnTo' => Yii::$app->request->referrer
                 ]
             ];
         }
@@ -232,7 +232,6 @@ This extension provides 4 actions:
 
     ```php
     <?php
-        $session = Yii::$app->session;
         public function actions() {
             return [
                 ...
@@ -240,12 +239,12 @@ This extension provides 4 actions:
                     'class' => 'asasmoyo\yii2saml\actions\LogoutAction',
                     'logoutIdP' => false, // if you don't want to logout on idp
                     'returnTo' => Url::to('site/bye'),
-                    'nameId' => $session->get('nameId'),
-                    'sessionIndex' => $session->get('sessionIndex'),
+                    'nameId' => Yii::$app->session->get('nameId'),
+                    'sessionIndex' => Yii::$app->session->get('sessionIndex'),
                     'stay' => false,
                     'nameIdFormat' => null,
-                    'nameIdNameQualifier' => $session->get('nameIdNameQualifier'),
-                    'nameIdSPNameQualifier' => $session->get('nameIdSPNameQualifier'),
+                    'nameIdNameQualifier' => Yii::$app->session->get('nameIdNameQualifier'),
+                    'nameIdSPNameQualifier' => Yii::$app->session->get('nameIdSPNameQualifier'),
                 ]
             ];
         }
