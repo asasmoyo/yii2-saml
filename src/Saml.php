@@ -3,22 +3,26 @@
 namespace asasmoyo\yii2saml;
 
 use Yii;
-use yii\base\Object;
+use Exception;
+use OneLogin\Saml2\Auth;
+use OneLogin\Saml2\Settings;
+use yii\base\BaseObject;
 
 /**
  * This class wraps OneLogin_Saml2_Auth class by creating an instance of that class using configurations specified in configFileName variable inside @app/config folder.
  */
-class Saml extends Object
+class Saml extends BaseObject
 {
 
     /**
      * The file in which contains OneLogin_Saml2_Auth configurations.
+     * @var string
      */
     public $configFileName = '@app/config/saml.php';
 
     /**
      * OneLogin_Saml2_Auth instance.
-     * @var \OneLogin_Saml2_Auth
+     * @var \OneLogin\Saml2\Auth
      */
     private $instance;
 
@@ -26,16 +30,18 @@ class Saml extends Object
      * Configurations for OneLogin_Saml2_Auth.
      * @var array
      */
-    private $config;
+    public $config;
 
     public function init()
     {
         parent::init();
 
-        $configFile = Yii::getAlias($this->configFileName);
+        if (empty($this->config)) {
+            $configFile = Yii::getAlias($this->configFileName);
+            $this->config = require($configFile);
+        }
 
-        $this->config = require($configFile);
-        $this->instance = new \OneLogin_Saml2_Auth($this->config);
+        $this->instance = new Auth($this->config);
     }
 
     /**
@@ -49,9 +55,9 @@ class Saml extends Object
     /**
      * Call the logout method on OneLogin_Saml2_Auth.
      */
-    public function logout($returnTo = null, $parameters = array(), $nameId = null, $sessionIndex = null)
+    public function logout($returnTo = null, $parameters = array(), $nameId = null, $sessionIndex = null, $stay = false, $nameIdFormat = null, $nameIdNameQualifier = null, $nameIdSPNameQualifier = null)
     {
-        return $this->instance->logout($returnTo, $parameters, $nameId, $sessionIndex);
+        return $this->instance->logout($returnTo, $parameters, $nameId, $sessionIndex, $stay, $nameIdFormat, $nameIdNameQualifier, $nameIdSPNameQualifier);
     }
 
     /**
@@ -60,6 +66,38 @@ class Saml extends Object
     public function getAttributes()
     {
         return $this->instance->getAttributes();
+    }
+
+    /**
+     * Call the getNameId method on OneLogin_Saml2_Auth.
+     */
+    public function getNameId()
+    {
+        return $this->instance->getNameId();
+    }
+
+    /**
+     * Call the getNameIdNameQualifier method on OneLogin_Saml2_Auth.
+     */
+    public function getNameIdNameQualifier()
+    {
+        return $this->instance->getNameIdNameQualifier();
+    }
+
+    /**
+     * Call the getNameIdSPNameQualifier method on OneLogin_Saml2_Auth.
+     */
+    public function getNameIdSPNameQualifier()
+    {
+        return $this->instance->getNameIdSPNameQualifier();
+    }
+
+    /**
+     * Call the getSessionIndex method on OneLogin_Saml2_Auth.
+     */
+    public function getSessionIndex()
+    {
+        return $this->instance->getSessionIndex();
     }
 
     /**
@@ -73,17 +111,17 @@ class Saml extends Object
     /**
      * Returns the metadata of this Service Provider in xml.
      * @return string Metadata in xml
-     * @throws \Exception
-     * @throws \OneLogin_Saml2_Error
+     * @throws Exception
+     * @throws OneLogin\Saml2\Error
      */
     public function getMetadata()
     {
-        $samlSettings = new \OneLogin_Saml2_Settings($this->config, true);
+        $samlSettings = new Settings($this->config, true);
         $metadata = $samlSettings->getSPMetadata();
 
         $errors = $samlSettings->validateMetadata($metadata);
         if (!empty($errors)) {
-            throw new \Exception('Invalid Metadata Service Provider');
+            throw new Exception('Invalid Metadata Service Provider');
         }
 
         return $metadata;
@@ -97,9 +135,12 @@ class Saml extends Object
         $this->instance->processResponse();
     }
 
-    public function processSLO()
+    /**
+     * Call the processSLO method on OneLogin_Saml2_Auth.
+     */
+    public function processSLO($keepLocalSession = false, $requestId = null, $retrieveParametersFromServer = false, $cbDeleteSession = null, $stay = false)
     {
-        $this->instance->processSLO();   
+        $this->instance->processSLO($keepLocalSession, $requestId, $retrieveParametersFromServer, $cbDeleteSession, $stay);
     }
 
     /**
@@ -125,5 +166,13 @@ class Saml extends Object
     {
         $samlSettings = $this->instance->getSettings();
         return $samlSettings->isDebugActive();
+    }
+
+    /**
+     * Check if user is authenticated.
+     */
+    public function isAuthenticated()
+    {
+        return $this->instance->isAuthenticated();
     }
 }

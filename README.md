@@ -70,6 +70,52 @@ return [
 ];
 ```
 
+**NOTE : As of version 1.6.0 you can directly put your configuration into your component. For example:**
+
+```php
+<?php
+
+$urlManager = Yii::$app->urlManager;
+$spBaseUrl = $urlManager->getHostInfo() . $urlManager->getBaseUrl();
+
+$config = [
+    // some other configuration here
+
+    'components' => [
+        'saml' => [
+            'class' => 'asasmoyo\yii2saml\Saml',
+            'config' => [
+                'sp' => [
+                    'entityId' => $spBaseUrl.'/saml/metadata',
+                    'assertionConsumerService' => [
+                        'url' => $spBaseUrl.'/saml/acs',
+                    ],
+                    'singleLogoutService' => [
+                        'url' => $spBaseUrl.'/saml/sls',
+                    ],
+                    'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
+                ],
+                'idp' => [
+                    'entityId' => 'identity-provider',
+                    'singleSignOnService' => [
+                        'url' => 'https://idp.com/sso',
+                    ],
+                    'singleLogoutService' => [
+                        'url' => 'https://idp.com/sls',
+                    ],
+                    'x509cert' => '<x509cert string>',
+                ],
+            ],
+        ]
+    ],
+
+    // some other configuration here
+];
+
+return $config;
+
+```
+
 Usage
 -----
 
@@ -97,13 +143,24 @@ This extension provides 4 actions:
         public function actions() {
             return [
                 'login' => [
-                    'class' => 'asasmoyo\yii2saml\actions\LoginAction'
+                    'class' => 'asasmoyo\yii2saml\actions\LoginAction',
+                    'returnTo' => Yii::app()->user->returnUrl
                 ]
             ];
         }
 
     }
     ```
+
+    The login method can receive seven optional parameters:
+
+    * `$returnTo` - The target URL the user should be returned to after login..
+    * `$parameters` - An array of parameters that will be added to the `GET` in the HTTP-Redirect.
+    * `$forceAuthn` - When true the `AuthNRequest` will set the `ForceAuthn='true'`
+    * `$isPassive` - When true the `AuthNRequest` will set the `Ispassive='true'`
+    * `$strict` - True if we want to stay (returns the url string) False to redirect
+    * `$setNameIdPolicy` - When true the AuthNRequest will set a nameIdPolicy element.
+    * `$nameIdValueReq` - Indicates to the IdP the subject that should be authenticated.
 
     Now you can login to your Identity Provider by visiting ``saml/login``.
 
@@ -138,10 +195,14 @@ This extension provides 4 actions:
         }
 
         /**
-         * @param array $attributes attributes sent by Identity Provider.
+         * @param array $param has 'attributes', 'nameId' , 'sessionIndex', 'nameIdNameQualifier' and 'nameIdSPNameQualifier' from response
          */
-        public function callback($attributes) {
+        public function callback($param) {
             // do something
+            //
+            // if (isset($_POST['RelayState'])) {
+            // $_POST['RelayState'] - should be returnUrl from login action
+            // }
         }
     }
     ```
@@ -171,13 +232,20 @@ This extension provides 4 actions:
 
     ```php
     <?php
-
+        $session = Yii::$app->session;
         public function actions() {
             return [
                 ...
                 'logout' => [
                     'class' => 'asasmoyo\yii2saml\actions\LogoutAction',
+                    'logoutIdP' => false, // if you don't want to logout on idp
                     'returnTo' => Url::to('site/bye'),
+                    'nameId' => $session->get('nameId'),
+                    'sessionIndex' => $session->get('sessionIndex'),
+                    'stay' => false,
+                    'nameIdFormat' => null,
+                    'nameIdNameQualifier' => $session->get('nameIdNameQualifier'),
+                    'nameIdSPNameQualifier' => $session->get('nameIdSPNameQualifier'),
                 ]
             ];
         }
@@ -207,7 +275,7 @@ Usage
 -----
 
 If the SAMLResponse is rejected, add to the SAML settings the parameter
-``` 
+```
 'debug' => true,
 ```
 and the reason will be prompted.

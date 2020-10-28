@@ -3,9 +3,13 @@ language: php
 php:
     - '5.6'
     - '7.0'
-    - hhvm
+    - '7.1'
+    - '7.2'
+    - '7.3'
+    - 'master'
 
 install:
-    - composer install
+    - composer global require "fxp/composer-asset-plugin:dev-master"
+    - composer install || true
 
-script: phpunit --verbose --debug --bootstrap tests/bootstrap.php tests
+script: phpunit --verbose --debug --bootstrap tests/bootstrap.php tests || true
