@@ -238,14 +238,15 @@ This extension provides 4 actions:
                 ...
                 'logout' => [
                     'class' => 'asasmoyo\yii2saml\actions\LogoutAction',
-                    'logoutIdP' => false, // if you don't want to logout on idp
                     'returnTo' => Url::to('site/bye'),
+                    'parameters' => [],
                     'nameId' => $session->get('nameId'),
                     'sessionIndex' => $session->get('sessionIndex'),
                     'stay' => false,
                     'nameIdFormat' => null,
                     'nameIdNameQualifier' => $session->get('nameIdNameQualifier'),
                     'nameIdSPNameQualifier' => $session->get('nameIdSPNameQualifier'),
+                    'logoutIdP' => false, // if you don't want to logout on idp
                 ]
             ];
         }
@@ -266,6 +267,7 @@ This extension provides 4 actions:
                 'sls' => [
                     'class' => 'asasmoyo\yii2saml\actions\SlsAction',
                     'successUrl' => Url::to('site/bye'),
+                    'logoutIdP' => false, // if you don't want to logout on idp
                 ]
             ]
         }
