@@ -144,7 +144,7 @@ This extension provides 4 actions:
             return [
                 'login' => [
                     'class' => 'asasmoyo\yii2saml\actions\LoginAction',
-                    'returnTo' => Yii::app()->user->returnUrl
+                    'returnTo' => Yii::$app->user->returnUrl
                 ]
             ];
         }
