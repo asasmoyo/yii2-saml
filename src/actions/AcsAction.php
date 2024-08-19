@@ -65,6 +65,7 @@ class AcsAction extends BaseAction
             'nameIdNameQualifier' => $this->samlInstance->getnameIdNameQualifier(),
             'nameIdSPNameQualifier' => $this->samlInstance->getNameIdSPNameQualifier(),
             'attributes' => $this->samlInstance->getAttributes(),
+            'isAuthenticated' => $this->samlInstance->isAuthenticated(),
         ];
         $response = call_user_func($this->successCallback, $callback_param);
         if ($response instanceof Response) {
